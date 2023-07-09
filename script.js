@@ -16,16 +16,20 @@ function displayCalendar(year, month) {
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   document.querySelector('.date h1').innerHTML = months[date.getMonth()];
-  document.querySelector('.date p').innerHTML = new Date().toDateString();
+  if (date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()) {
+    document.querySelector('.date p').innerHTML = currentDate.toDateString();
+  } else {
+    document.querySelector('.date p').innerHTML = date.toDateString();
+  }
   
   let days = "";
 
   for (let x = firstDayIndex; x > 0; x--) {
     days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
   }
-
+  
   for (let i = 1; i <= lastDay; i++) {
-    if (i === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
+    if (i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()) {
       days += `<div class="today">${i}</div>`;
     } else {
       days += `<div>${i}</div>`;
